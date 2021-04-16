@@ -18,66 +18,83 @@ float r1 = 255, g1 = 0, b1 = 0;
 float r2 = 0, g2 = 255, b2 = 0;
 
 //188 198 62 95
-void keyboardCallback(unsigned char key, int x, int y) {
+void keyboardCallback(unsigned char key, int x, int y)
+{
     printf("%c\n", key);
-    switch (key) {
-        case 'p':
-            animationOn = !animationOn;
-            break;
-        case 'q':
-            Tzval += 2;
-            break;
-        case 'e':
-            Tzval -= 2;
-            break;
-        case 'w':
-            Tyval += 2;
-            break;
-        case 's':
-            Tyval -= 2;
-            break;
-        case 'a':
-            Txval += 2;
-            break;
-        case 'd':
-            Txval -= 2;
-            break;
-        case 'z':
-            angleNow += 5;
-            break;
-        case 'x':
-            angleNow -= 5;
-            break;
-        case 'u':
-            centerX += 2;
-            //angleX%=360;
-            break;
-        case 'i':
-            centerY += 2;
-            //angleY%=360;
-            break;
-        case 'o':
-            centerZ += 2;
-            //angleZ%=360;
-            break;
+    switch (key)
+    {
+    case 'p':
+        animationOn = !animationOn;
+        break;
+    case 'q':
+        Tzval += 2;
+        break;
+    case 'e':
+        Tzval -= 2;
+        break;
+    case 'w':
+        Tyval += 2;
+        break;
+    case 's':
+        Tyval -= 2;
+        break;
+    case 'a':
+        Txval += 2;
+        break;
+    case 'd':
+        Txval -= 2;
+        break;
+    case 'z':
+        angleNow += 5;
+        break;
+    case 'x':
+        angleNow -= 5;
+        break;
+    case 'u':
+        centerX += 2;
+        //angleX%=360;
+        break;
+    case 'i':
+        centerY += 2;
+        //angleY%=360;
+        break;
+    case 'o':
+        centerZ += 2;
+        //angleZ%=360;
+        break;
+    case 'j':
+        centerX -= 2;
+        //angleX%=360;
+        break;
+    case 'k':
+        centerY -= 2;
+        //angleY%=360;
+        break;
+    case 'l':
+        centerZ -= 2;
+        //angleZ%=360;
+        break;
     }
     printf("%d %d %d\n", Txval, Tyval, Tzval);
     printf("%d %d %d\n", centerX, centerY, centerZ);
     glutPostRedisplay();
 }
 
-void animate() {
+void animate()
+{
     if (animationOn == false)
         return;
     angleNow += .02f;
-    if (angleNow >= 360) {
+    if (angleNow >= 360)
+    {
         angleNow = 0;
     }
 
     glutPostRedisplay();  ////Tell GLUT that the scene has changed
 }
 
-void classroom() {
+void classroom()
+{
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glMatrixMode(GL_PROJECTION);
@@ -119,11 +136,13 @@ void classroom() {
     glPopMatrix();
 
     //tables
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
             glPushMatrix();
             int translateX = 8 + 70 + j * 40;
-            int translateY = 50 + i * 45;
+            int translateY = 100 + i * 45;
             glTranslatef(translateX, translateY, 0);
             //cerr<< i*3+j <<" "<< translateX<<" "<<translateY<<"\n";
             Table t(30, 25, 40, 20, 10, 2, 25);
@@ -133,10 +152,12 @@ void classroom() {
     }
 
     //chairs
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
             int translateX = 8 + 70 + j * 40 + 10 + 2.5;
-            int translateY = 50 + 25 * (i + 1) + 20 * i + 3;
+            int translateY = 100 + 25 * (i + 1) + 20 * i + 3;
 
             glPushMatrix();
             glTranslatef(translateX, translateY, 0);
@@ -159,7 +180,8 @@ void classroom() {
     glutSwapBuffers();
 }
 
-void displayTest() {
+void displayTest()
+{
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glMatrixMode(GL_PROJECTION);
@@ -184,7 +206,8 @@ void displayTest() {
     glutSwapBuffers();
 }
 
-void display_work() {
+void display_work()
+{
     glutInitWindowPosition(200, 200);
     windowHeight = 600;
     windowWidth = 1000;
@@ -200,7 +223,8 @@ void display_work() {
     glutDisplayFunc(classroom);
 }
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     int type = 0;

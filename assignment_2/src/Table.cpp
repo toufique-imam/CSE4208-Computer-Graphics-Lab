@@ -52,6 +52,7 @@ void Table::drawTable() {
     //middle stand
     glPushMatrix();
     glTranslatef(rightPartition, 0, 0);
+    c.setSurfaceColors(c.offwhite2);
     //c.setValue(1, tableWide, tableHeight);
     c.drawCube(false);
     glPopMatrix();
@@ -59,6 +60,7 @@ void Table::drawTable() {
     //table surface
     glPushMatrix();
     glTranslatef(0, -.5, tableHeight - .1);
+    c.setSurfaceColors(c.woodColor);
     c.setValue(tableLength + 1, tableWide + 1, 1);
     c.drawCube(false);
     glPopMatrix();
@@ -88,6 +90,7 @@ void Table::drawTable() {
     glPushMatrix();
     glTranslatef(rightPartition, 0, left_pos_z);
     c.setValue(leftPartition, 1, side_panel_size_z);
+    c.setSurfaceColors(c.offwhite1);
     c.drawCube(false);
     glPopMatrix();
 }

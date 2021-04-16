@@ -49,6 +49,7 @@ class Cube {
     int offwhite2[3] = {255, 225, 176};
     int offYellow[3] = {252, 188, 83};
     int skyblue[3] = {3, 213, 255};
+    int blue[3] = {29, 122, 222};
     int blueash[3] = {109, 126, 153};
 
    protected:

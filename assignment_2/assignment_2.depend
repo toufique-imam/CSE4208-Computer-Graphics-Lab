@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1618586377 source:e:\study\other\graphics\assignment_2\main.cpp
+1618598553 source:e:\study\other\graphics\assignment_2\main.cpp
 	<GL/gl.h>
 	<GL/glu.h>
 	<GL/glut.h>
@@ -14,10 +14,11 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
-1618586208 e:\study\other\graphics\assignment_2\include\room.h
+1618595111 e:\study\other\graphics\assignment_2\include\room.h
 	"Cube.h"
+	"Window.h"
 
-1618586047 e:\study\other\graphics\assignment_2\include\cube.h
+1618592801 e:\study\other\graphics\assignment_2\include\cube.h
 	<GL/gl.h>
 	<GL/glu.h>
 	<GL/glut.h>
@@ -38,12 +39,18 @@
 1618586192 source:e:\study\other\graphics\assignment_2\src\drawer.cpp
 	"Drawer.h"
 
-1618586239 source:e:\study\other\graphics\assignment_2\src\room.cpp
+1618598739 source:e:\study\other\graphics\assignment_2\src\room.cpp
 	"Room.h"
 
-1618586310 source:e:\study\other\graphics\assignment_2\src\table.cpp
+1618599202 source:e:\study\other\graphics\assignment_2\src\table.cpp
 	"Table.h"
 
 1618588564 source:e:\study\other\graphics\assignment_2\src\cube.cpp
 	"Cube.h"
+
+1618597243 e:\study\other\graphics\assignment_2\include\window.h
+	"Cube.h"
+
+1618598372 source:e:\study\other\graphics\assignment_2\src\window.cpp
+	"Window.h"
 

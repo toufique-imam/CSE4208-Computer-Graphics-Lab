@@ -1,6 +1,7 @@
 #ifndef ROOM_H
 #define ROOM_H
 #include "Cube.h"
+#include "Window.h"
 
 class Room {
     float a, b, c;
@@ -15,6 +16,8 @@ class Room {
     void genColor();
     void drawTileLines();
     void drawDoor();
+    void drawWallLeft();
+    void drawWallRight();
 
    protected:
    private:

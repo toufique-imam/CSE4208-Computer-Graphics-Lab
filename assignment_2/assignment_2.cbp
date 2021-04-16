@@ -49,12 +49,14 @@
 		<Unit filename="include/Drawer.h" />
 		<Unit filename="include/Room.h" />
 		<Unit filename="include/Table.h" />
+		<Unit filename="include/Window.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Chair.cpp" />
 		<Unit filename="src/Cube.cpp" />
 		<Unit filename="src/Drawer.cpp" />
 		<Unit filename="src/Room.cpp" />
 		<Unit filename="src/Table.cpp" />
+		<Unit filename="src/Window.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
