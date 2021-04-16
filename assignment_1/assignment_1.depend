@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1618585508 source:e:\study\other\graphics\assignment_1\main.cpp
+	<bits/stdc++.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<GL/glut.h>
+
+1617515886 e:\downloads\compressed\glut-3.7.6-bin\include\gl\glut.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
