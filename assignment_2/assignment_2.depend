@@ -1,0 +1,49 @@
+# depslib dependency file v1.0
+1618586377 source:e:\study\other\graphics\assignment_2\main.cpp
+	<GL/gl.h>
+	<GL/glu.h>
+	<GL/glut.h>
+	"Room.h"
+	"Chair.h"
+	"Cube.h"
+	"Drawer.h"
+	"Table.h"
+
+1617515886 e:\downloads\compressed\glut-3.7.6-bin\include\gl\glut.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1618586208 e:\study\other\graphics\assignment_2\include\room.h
+	"Cube.h"
+
+1618586047 e:\study\other\graphics\assignment_2\include\cube.h
+	<GL/gl.h>
+	<GL/glu.h>
+	<GL/glut.h>
+	<bits/stdc++.h>
+
+1618585781 e:\study\other\graphics\assignment_2\include\chair.h
+	"Cube.h"
+
+1618586160 e:\study\other\graphics\assignment_2\include\drawer.h
+	"Cube.h"
+
+1618586277 e:\study\other\graphics\assignment_2\include\table.h
+	"Cube.h"
+
+1618585771 source:e:\study\other\graphics\assignment_2\src\chair.cpp
+	"Chair.h"
+
+1618586192 source:e:\study\other\graphics\assignment_2\src\drawer.cpp
+	"Drawer.h"
+
+1618586239 source:e:\study\other\graphics\assignment_2\src\room.cpp
+	"Room.h"
+
+1618586310 source:e:\study\other\graphics\assignment_2\src\table.cpp
+	"Table.h"
+
+1618588564 source:e:\study\other\graphics\assignment_2\src\cube.cpp
+	"Cube.h"
+
