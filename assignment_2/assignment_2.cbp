@@ -46,6 +46,8 @@
 		</Linker>
 		<Unit filename="include/Chair.h" />
 		<Unit filename="include/Cube.h" />
+		<Unit filename="include/Cylinder.h" />
+		<Unit filename="include/Dias.h" />
 		<Unit filename="include/Drawer.h" />
 		<Unit filename="include/Room.h" />
 		<Unit filename="include/Table.h" />
@@ -53,6 +55,8 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Chair.cpp" />
 		<Unit filename="src/Cube.cpp" />
+		<Unit filename="src/Cylinder.cpp" />
+		<Unit filename="src/Dias.cpp" />
 		<Unit filename="src/Drawer.cpp" />
 		<Unit filename="src/Room.cpp" />
 		<Unit filename="src/Table.cpp" />

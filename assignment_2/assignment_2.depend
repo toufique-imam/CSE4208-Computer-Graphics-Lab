@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1618598553 source:e:\study\other\graphics\assignment_2\main.cpp
+1618833886 source:e:\study\other\graphics\assignment_2\main.cpp
 	<GL/gl.h>
 	<GL/glu.h>
 	<GL/glut.h>
@@ -8,17 +8,19 @@
 	"Cube.h"
 	"Drawer.h"
 	"Table.h"
+	"Dias.h"
 
 1617515886 e:\downloads\compressed\glut-3.7.6-bin\include\gl\glut.h
 	<windows.h>
 	<GL/gl.h>
 	<GL/glu.h>
 
-1618595111 e:\study\other\graphics\assignment_2\include\room.h
+1618763144 e:\study\other\graphics\assignment_2\include\room.h
 	"Cube.h"
 	"Window.h"
+	"Cylinder.h"
 
-1618592801 e:\study\other\graphics\assignment_2\include\cube.h
+1618833988 e:\study\other\graphics\assignment_2\include\cube.h
 	<GL/gl.h>
 	<GL/glu.h>
 	<GL/glut.h>
@@ -27,8 +29,9 @@
 1618585781 e:\study\other\graphics\assignment_2\include\chair.h
 	"Cube.h"
 
-1618586160 e:\study\other\graphics\assignment_2\include\drawer.h
+1618833765 e:\study\other\graphics\assignment_2\include\drawer.h
 	"Cube.h"
+	"Cylinder.h"
 
 1618586277 e:\study\other\graphics\assignment_2\include\table.h
 	"Cube.h"
@@ -36,21 +39,33 @@
 1618585771 source:e:\study\other\graphics\assignment_2\src\chair.cpp
 	"Chair.h"
 
-1618586192 source:e:\study\other\graphics\assignment_2\src\drawer.cpp
+1618833784 source:e:\study\other\graphics\assignment_2\src\drawer.cpp
 	"Drawer.h"
 
-1618598739 source:e:\study\other\graphics\assignment_2\src\room.cpp
+1618773898 source:e:\study\other\graphics\assignment_2\src\room.cpp
 	"Room.h"
 
 1618599202 source:e:\study\other\graphics\assignment_2\src\table.cpp
 	"Table.h"
 
-1618588564 source:e:\study\other\graphics\assignment_2\src\cube.cpp
+1618688114 source:e:\study\other\graphics\assignment_2\src\cube.cpp
 	"Cube.h"
 
 1618597243 e:\study\other\graphics\assignment_2\include\window.h
 	"Cube.h"
 
-1618598372 source:e:\study\other\graphics\assignment_2\src\window.cpp
+1618772544 source:e:\study\other\graphics\assignment_2\src\window.cpp
 	"Window.h"
+
+1618683185 source:e:\study\other\graphics\assignment_2\src\dias.cpp
+	"Dias.h"
+
+1618682862 e:\study\other\graphics\assignment_2\include\dias.h
+	"Cube.h"
+
+1618772866 e:\study\other\graphics\assignment_2\include\cylinder.h
+	"Cube.h"
+
+1618689861 source:e:\study\other\graphics\assignment_2\src\cylinder.cpp
+	"Cylinder.h"
 

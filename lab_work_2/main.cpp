@@ -369,6 +369,7 @@ int main (int argc, char **argv)
     display_work_4();
     display_work_5();
     glutMainLoop();
+
     return 0;
 }
 

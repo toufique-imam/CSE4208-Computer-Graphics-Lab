@@ -1,6 +1,7 @@
 #ifndef DRAWER_H
 #define DRAWER_H
 #include "Cube.h"
+#include "Cylinder.h"
 
 class Drawer {
     int sizex, sizey, sizez;
@@ -13,6 +14,7 @@ class Drawer {
         sizez = z;
     }
     void drawDrawer();
+    void drawBookself();
 
    protected:
    private:

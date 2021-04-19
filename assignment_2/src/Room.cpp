@@ -28,7 +28,7 @@ void Room::drawRoom()
     genColor();
     glPushMatrix();
     Cube cb(a, b, c);
-    int filterSurface[] = {0,0,1,1,1,0};
+    int filterSurface[] = {0,0,1,1,0,0};
     cb.setfilterSurface(filterSurface);
     cb.setSurfaceColors(colors);
     cb.drawCube(false);
@@ -40,9 +40,17 @@ void Room::drawRoom()
 
     drawWallLeft();
     drawWallRight();
-    //drawDoor();
+        glPushMatrix();
+        glTranslatef(0 , -45 , 0);
+        drawFan();
+    glPopMatrix();
 
-    //todo make windows
+    glPushMatrix();
+        glTranslatef(0 , 60 , 0);
+        drawFan();
+    glPopMatrix();
+    drawLight();
+    drawClock();
 }
 
 Room::Room(int ax, int bx, int cx, int t)
@@ -97,7 +105,7 @@ void Room::drawWallLeft()
     cube.drawCube(false);
     glPopMatrix();
 
-    cube.setValue(1.0 , b/10 , c/2);
+    cube.setValue(1.0, b/10, c/2);
     glPushMatrix();
     glTranslatef(a, 0, 0);
     cube.drawCube(false);
@@ -112,51 +120,52 @@ void Room::drawWallLeft()
     glTranslatef(a, b-b/10, 0);
     cube.drawCube(false);
     glPopMatrix();
-    float anow = 1 , bnow = b-b/5-(3.0*b)/10.0 , cnow = c/4.0;
-    cube.setValue(anow , bnow , cnow);
+    float anow = 1, bnow = b-b/5-(3.0*b)/10.0, cnow = c/4.0;
+    cube.setValue(anow, bnow, cnow);
     glPushMatrix();
-        glTranslatef(a , (2.0*b)/5.0 , 0);
-        cube.drawCube(false);
+    glTranslatef(a, (2.0*b)/5.0, 0);
+    cube.drawCube(false);
     glPopMatrix();
 
-    Window w(bnow , cnow);
+    Window w(bnow, cnow);
     glPushMatrix();
-        glTranslatef(a , (2.0*b)/5.0 , c/4);
-        w.drawCageWindow();
+    glTranslatef(a, (2.0*b)/5.0, c/4);
+    w.drawCageWindow();
     glPopMatrix();
 }
 
-void Room::drawWallRight(){
+void Room::drawWallRight()
+{
     Cube cube;
     cube.setValue(1.0, b, c/2.0);
     cube.setSurfaceColors(colors[3]);
     glPushMatrix();
-        glTranslatef(0, 0, c/2);
-        cube.drawCube(false);
+    glTranslatef(0, 0, c/2);
+    cube.drawCube(false);
     glPopMatrix();
 
-    cube.setValue(1.0 , (2*b/5.0) , c/2);
+    cube.setValue(1.0, (2*b/5.0), c/2);
     glPushMatrix();
-        cube.drawCube(false);
+    cube.drawCube(false);
     glPopMatrix();
 
-    cube.setValue(1.0 , b/10 , c/2);
+    cube.setValue(1.0, b/10, c/2);
     glPushMatrix();
-        glTranslatef(0, b-b/10, 0);
-        cube.drawCube(false);
+    glTranslatef(0, b-b/10, 0);
+    cube.drawCube(false);
     glPopMatrix();
 
-    float anow = 1 , bnow = b-b/5-(3.0*b)/10.0 , cnow = c/4.0;
-    cube.setValue(anow , bnow , cnow);
+    float anow = 1, bnow = b-b/5-(3.0*b)/10.0, cnow = c/4.0;
+    cube.setValue(anow, bnow, cnow);
     glPushMatrix();
-        glTranslatef(0 , (2.0*b)/5.0 , 0);
-        cube.drawCube(false);
+    glTranslatef(0, (2.0*b)/5.0, 0);
+    cube.drawCube(false);
     glPopMatrix();
 
-    Window w(bnow , cnow);
     glPushMatrix();
-        glTranslatef(0 , (2.0*b)/5.0 , c/4);
-        w.drawCageWindow();
+    Window w(bnow, cnow);
+    glTranslatef(0, (2.0*b)/5.0, c/4);
+    w.drawCageWindow();
     glPopMatrix();
 }
 
@@ -167,5 +176,137 @@ void Room::drawDoor()
     glTranslatef(a, b / 10, 0);
     ch.setSurfaceColors(ch.browns);
     ch.drawCube(false);
+    glPopMatrix();
+
+
+    //draw knob up
+    glPushMatrix();
+    Cylinder knob (2,2);
+    glTranslatef(a-2, b / 10+b / 5.0-5, c/4+7);
+    glRotatef(90, 0, 1,0);
+    knob.setCylinderColor(ch.darkyellow);
+    knob.drawCylinder();
+    glPopMatrix();
+
+    //draw knob down
+    glPushMatrix();
+    glTranslatef(a-2, b / 10+b / 5.0-5, c/4-7);
+    glRotatef(90, 0, 1,0);
+    knob.drawCylinder();
+    glPopMatrix();
+
+    //draw knob handle
+    glPushMatrix();
+    ch.setValue(1, 1, 14);
+    glTranslatef(a-3, b / 10+b / 5.0-5, c/4-7);
+
+    ch.setSurfaceColors(ch.darkyellow);
+    ch.drawCube(false);
+    glPopMatrix();
+
+}
+
+void Room::drawFan()
+{
+
+    Cube fanWings(50, 15, 1);
+    //stand
+    glPushMatrix();
+    Cylinder fanStand(1, 50);
+    fanStand.setCylinderColor(fanWings.black);
+    glTranslatef(a / 2, b / 2, c - 50);
+    fanStand.drawCylinder();
+    glPopMatrix();
+    //body
+    Cylinder fanBody(15, 10);
+    fanBody.setCylinderColor(fanWings.white);
+    glPushMatrix();
+    glTranslatef(a / 2, b / 2, c - 55);
+    fanBody.drawCylinder();
+    glPopMatrix();
+
+    fanWings.setSurfaceColors(fanWings.black);
+    glPushMatrix();
+    glTranslatef(a / 2, b / 2, c - 50);
+    glRotatef(angle, 0, 0, 1);
+    fanWings.drawCube(false);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(a / 2, b / 2, c - 50);
+    glRotatef((90 + angle) % 360, 0, 0, 1);
+    fanWings.drawCube(false);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(a / 2, b / 2, c - 50);
+    glRotatef((180 + angle) % 360, 0, 0, 1);
+    fanWings.drawCube(false);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(a / 2, b / 2, c - 50);
+    glRotatef((270 + angle) % 360, 0, 0, 1);
+    fanWings.drawCube(false);
+    glPopMatrix();
+}
+
+void Room::drawLight()
+{
+
+    Cube lightShade(70, 10, 1);
+    glPushMatrix();
+    {
+        lightShade.setSurfaceColors(lightShade.blueash);
+        glTranslatef(a/2-35, 10, c-10);
+        glRotatef(110, 1, 0, 0);
+        lightShade.drawCube(false);
+    }
+    glPopMatrix();
+
+    glPushMatrix();
+
+    glTranslatef(a/2-30,5, c-15);
+    glRotatef(90, 0, 1, 0);
+    Cylinder light(5, 60);
+    light.setCylinderColor(lightShade.blueash);
+    light.drawCylinder();
+
+    glPopMatrix();
+}
+
+void Room::drawClock()
+{
+    Cube cx(20, 1, 40);
+    cx.setSurfaceColors(cx.white);
+    glPushMatrix();
+    glTranslatef(30, 2, c -50);
+    cx.drawCube(false, false);
+    glPopMatrix();
+
+    cx.setValue(24, 1, 44);
+    cx.setSurfaceColors(cx.black);
+    glPushMatrix();
+    glTranslatef(28, 1, c -51);
+    cx.drawCube(false, false);
+    glPopMatrix();
+
+    //hour
+    glPushMatrix();
+    cx.setValue(12, 1, 1);
+    glTranslatef(40, 3, c - 30);
+    glRotatef(-90, 0, 1, 0);
+
+    cx.setSurfaceColors(cx.black);
+    cx.drawCube(false, false);
+    glPopMatrix();
+
+    //minute
+    glPushMatrix();
+    cx.setValue(8, 1, 1);
+    glTranslatef(40, 3, c - 30);
+    glRotatef(70, 0, 1, 0);
+    cx.setSurfaceColors(cx.black);
+    cx.drawCube(false, false);
     glPopMatrix();
 }

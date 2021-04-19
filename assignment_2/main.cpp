@@ -6,21 +6,22 @@
 #include "Cube.h"
 #include "Drawer.h"
 #include "Table.h"
+#include "Dias.h"
 
 bool animationOn = true;
 
 int windowWidth = 1000, windowHeight = 1000;
-int centerX = 0, centerY = 0, centerZ = 0;
+int centerX =  158, centerY =-50, centerZ = 66;
 
-int Txval = 188, Tyval = 198, Tzval = 62, angleNow = 95;
+int Txval = 70, Tyval = 244, Tzval = 62, angleNow = 95;
 
 float r1 = 255, g1 = 0, b1 = 0;
 float r2 = 0, g2 = 255, b2 = 0;
 
-//188 198 62 95
+int angleFan = 0;
 void keyboardCallback(unsigned char key, int x, int y)
 {
-    printf("%c\n", key);
+    printf("%c %d %d\n", key, x, y);
     switch (key)
     {
     case 'p':
@@ -33,10 +34,10 @@ void keyboardCallback(unsigned char key, int x, int y)
         Tzval -= 2;
         break;
     case 'w':
-        Tyval += 2;
+        Tyval -= 2;
         break;
     case 's':
-        Tyval -= 2;
+        Tyval += 2;
         break;
     case 'a':
         Txval += 2;
@@ -79,16 +80,12 @@ void keyboardCallback(unsigned char key, int x, int y)
     printf("%d %d %d\n", centerX, centerY, centerZ);
     glutPostRedisplay();
 }
-
 void animate()
 {
     if (animationOn == false)
         return;
-    angleNow += .02f;
-    if (angleNow >= 360)
-    {
-        angleNow = 0;
-    }
+    angleFan += 10;
+    angleFan%=360;
 
     glutPostRedisplay();  ////Tell GLUT that the scene has changed
 }
@@ -116,6 +113,8 @@ void classroom()
     Cube c;
     glPushMatrix();
     Room r(200, 250, 200, 20);
+
+    r.updateAngles(angleFan);
     r.drawRoom();
     glPopMatrix();
 
@@ -171,9 +170,27 @@ void classroom()
     }
     //drawer
     glPushMatrix();
-    glTranslatef(5, 20, 0);
-    Drawer d(50, 60, 100);
-    d.drawDrawer();
+
+        glTranslatef(5, 65, 0);
+        Drawer drawer(50, 60, 100);
+        drawer.drawDrawer();
+
+    glPopMatrix();
+
+    //bookshelf
+    glPushMatrix();
+    glTranslatef(5, 65+75, 1);
+    drawer.drawBookself();
+    glPopMatrix();
+
+    //dias
+    Dias dias(100, 60, 10, 70);
+
+    glPushMatrix();
+    {
+        glTranslatef(0, 5, 0);
+        dias.drawDias();
+    }
     glPopMatrix();
 
     glFlush();
@@ -189,18 +206,19 @@ void displayTest()
 
     int w = glutGet(GLUT_WINDOW_WIDTH);
     int h = glutGet(GLUT_WINDOW_HEIGHT);
-    //    gluPerspective(angleY, w / h, 0.1, 1000);
-    glFrustum(0, 500, 0, 500, 0, 500);
+    gluPerspective(angleNow, w / h, 0.1, 1000);
+    //glFrustum(0, 500, 0, 500, 0, 500);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
     gluLookAt(
         Txval, Tyval, Tzval,
-        0, 0, 0,
-        1, 0, 0);
-
-    Room r(100, 100, 100, 20);
-    r.drawRoom();
+        centerX, centerY, centerZ,
+        0, 0, 1);
+    GLUquadricObj *quadratic;
+    quadratic = gluNewQuadric();
+    //glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
+    gluCylinder(quadratic,20,10,10,320,320);
 
     glFlush();
     glutSwapBuffers();
@@ -217,9 +235,8 @@ void display_work()
     glShadeModel(GL_FLAT);
 
     glEnable(GL_DEPTH_TEST);
-
+    glutIdleFunc(animate);
     glutKeyboardFunc(keyboardCallback);
-
     glutDisplayFunc(classroom);
 }
 
@@ -232,3 +249,4 @@ int main(int argc, char** argv)
     glutMainLoop();
     return 0;
 }
+

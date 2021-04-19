@@ -1,7 +1,8 @@
 #include "Cube.h"
 #define debug(x) cerr << #x << " " << x << "\n";
 
-Cube::Cube() {
+Cube::Cube()
+{
     this->a = this->b = this->c = 1;
     //ctor
     /*
@@ -10,7 +11,8 @@ Cube::Cube() {
     */
 }
 
-Cube::Cube(int a, int b, int c) {
+Cube::Cube(int a, int b, int c)
+{
     this->a = a;
     this->b = b;
     this->c = c;
@@ -18,7 +20,8 @@ Cube::Cube(int a, int b, int c) {
     memset(filter, 0, sizeof filter);
 }
 
-Cube::Cube(float a, float b, float c) {
+Cube::Cube(float a, float b, float c)
+{
     this->a = a;
     this->b = b;
     this->c = c;
@@ -26,7 +29,8 @@ Cube::Cube(float a, float b, float c) {
     memset(filter, 0, sizeof filter);
 }
 
-vector<vector<float> > Cube::generate_cube(float a, float b, float c) {
+vector<vector<float> > Cube::generate_cube(float a, float b, float c)
+{
     vector<vector<float> > ans;
     vector<float> v(3, 0);
     ans.push_back(v);
@@ -55,9 +59,11 @@ vector<vector<float> > Cube::generate_cube(float a, float b, float c) {
     return ans;
 }
 
-void Cube::drawSurface(int points[], bool randomColor, int surfaceIdx) {
+void Cube::drawSurface(int points[], bool randomColor, int surfaceIdx, bool printLines)
+{
     glBegin(GL_QUADS);
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 4; i++)
+    {
         if (randomColor)
             glColor3f(cube_colors[points[i]][0], cube_colors[points[i]][1], cube_colors[points[i]][2]);
         else
@@ -66,33 +72,40 @@ void Cube::drawSurface(int points[], bool randomColor, int surfaceIdx) {
         glVertex3f(cube_vers[points[i]][0], cube_vers[points[i]][1], cube_vers[points[i]][2]);
     }
     glEnd();
-
+    if(!printLines)return;
     glBegin(GL_LINES);
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 4; i++)
+    {
         glColor3f(0, 0, 0);
         glVertex3f(cube_vers[points[i]][0], cube_vers[points[i]][1], cube_vers[points[i]][2]);
     }
     glEnd();
 }
-void Cube::drawCube(bool randomColor) {
+void Cube::drawCube(bool randomColor, bool printLines)
+{
     cube_vers = generate_cube(a, b, c);
     cube_colors = generate_cube(200, 200, 200);
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < 6; i++)
+    {
         if (filter[i] == 0)
-            drawSurface(surfaces[i], randomColor, i);
+            drawSurface(surfaces[i], randomColor, i, printLines);
     }
 }
 
-void Cube::setSurfaceColors(int colors[][3]) {
-    for (int i = 0; i < 6; i++) {
+void Cube::setSurfaceColors(int colors[][3])
+{
+    for (int i = 0; i < 6; i++)
+    {
         surfaceColors[i][0] = (1.0f * colors[i][0]) / 255.0;
         surfaceColors[i][1] = (1.0f * colors[i][1]) / 255.0;
         surfaceColors[i][2] = (1.0f * colors[i][2]) / 255.0;
     }
 }
 
-void Cube::setSurfaceColors(int colors[]) {
-    for (int i = 0; i < 6; i++) {
+void Cube::setSurfaceColors(int colors[])
+{
+    for (int i = 0; i < 6; i++)
+    {
         surfaceColors[i][0] = (colors[0] * 1.0f) / 255.0;
         surfaceColors[i][1] = (colors[1] * 1.0f) / 255.0;
         surfaceColors[i][2] = (colors[2] * 1.0f) / 255.0;
@@ -103,21 +116,25 @@ void Cube::setSurfaceColors(int colors[]) {
 (1.0f/255)*byte_in;
 */
 
-void Cube::setValue(int a, int b, int c) {
+void Cube::setValue(int a, int b, int c)
+{
     this->a = a;
     this->b = b;
     this->c = c;
     memset(filter, 0, sizeof filter);
 }
-void Cube::setValue(float a, float b, float c) {
+void Cube::setValue(float a, float b, float c)
+{
     this->a = a;
     this->b = b;
     this->c = c;
     memset(filter, 0, sizeof filter);
 }
 
-void Cube::setfilterSurface(int f[]) {
-    for (int i = 0; i < 6; i++) {
+void Cube::setfilterSurface(int f[])
+{
+    for (int i = 0; i < 6; i++)
+    {
         filter[i] = f[i];
     }
 }

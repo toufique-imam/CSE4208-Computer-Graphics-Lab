@@ -2,9 +2,11 @@
 #define ROOM_H
 #include "Cube.h"
 #include "Window.h"
+#include "Cylinder.h"
 
 class Room {
     float a, b, c;
+    int angle = 0 ;
     int colors[6][3];
     float tileSize;
 
@@ -18,6 +20,13 @@ class Room {
     void drawDoor();
     void drawWallLeft();
     void drawWallRight();
+    void drawFan();
+    void drawLight();
+    void drawClock();
+    void updateAngles(int val){
+        angle = (angle+val);
+        angle%=360;
+    }
 
    protected:
    private:
