@@ -1,0 +1,71 @@
+# depslib dependency file v1.0
+1619364494 source:e:\study\other\graphics-lab\assignment_3\main.cpp
+	<GL/gl.h>
+	<GL/glu.h>
+	<GL/glut.h>
+	"Room.h"
+	"Chair.h"
+	"Cube.h"
+	"Drawer.h"
+	"Table.h"
+	"Dias.h"
+
+1617515886 e:\downloads\compressed\glut-3.7.6-bin\include\gl\glut.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1619363770 e:\study\other\graphics-lab\assignment_3\include\room.h
+	"Cube.h"
+	"Window.h"
+	"Cylinder.h"
+
+1619292313 e:\study\other\graphics-lab\assignment_3\include\cube.h
+	<GL/gl.h>
+	<GL/glu.h>
+	<GL/glut.h>
+	<bits/stdc++.h>
+
+1619280611 e:\study\other\graphics-lab\assignment_3\include\window.h
+	"Cube.h"
+
+1619280523 e:\study\other\graphics-lab\assignment_3\include\cylinder.h
+	"Cube.h"
+
+1619280477 e:\study\other\graphics-lab\assignment_3\include\chair.h
+	"Cube.h"
+
+1619280541 e:\study\other\graphics-lab\assignment_3\include\drawer.h
+	"Cube.h"
+	"Cylinder.h"
+
+1619280553 e:\study\other\graphics-lab\assignment_3\include\table.h
+	"Cube.h"
+
+1619280532 e:\study\other\graphics-lab\assignment_3\include\dias.h
+	"Cube.h"
+
+1619284591 source:e:\study\other\graphics-lab\assignment_3\src\chair.cpp
+	"Chair.h"
+
+1619365813 source:e:\study\other\graphics-lab\assignment_3\src\cube.cpp
+	"Cube.h"
+
+1619284600 source:e:\study\other\graphics-lab\assignment_3\src\cylinder.cpp
+	"Cylinder.h"
+
+1619284637 source:e:\study\other\graphics-lab\assignment_3\src\dias.cpp
+	"Dias.h"
+
+1619284665 source:e:\study\other\graphics-lab\assignment_3\src\drawer.cpp
+	"Drawer.h"
+
+1619363090 source:e:\study\other\graphics-lab\assignment_3\src\room.cpp
+	"Room.h"
+
+1619284784 source:e:\study\other\graphics-lab\assignment_3\src\table.cpp
+	"Table.h"
+
+1619284794 source:e:\study\other\graphics-lab\assignment_3\src\window.cpp
+	"Window.h"
+
