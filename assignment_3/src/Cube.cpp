@@ -62,13 +62,13 @@ vector<vector<float> > Cube::generate_cube(float a, float b, float c)
 void Cube::drawSurface(int points[], bool randomColor, int surfaceIdx, bool printLines)
 {
     GLfloat mat_shininess[] = {shines[surfaceIdx]};
-
-    glMaterialfv(GL_FRONT, GL_AMBIENT, surfaceLights[0][surfaceIdx]);
-    glMaterialfv(GL_FRONT, GL_DIFFUSE, surfaceLights[1][surfaceIdx]);
-    glMaterialfv(GL_FRONT, GL_SPECULAR, surfaceLights[2][surfaceIdx]);
-    glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
-
+    glPushMatrix();
     glBegin(GL_QUADS);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, surfaceLights[0][surfaceIdx]);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, surfaceLights[1][surfaceIdx]);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, surfaceLights[2][surfaceIdx]);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, mat_shininess);
+
     for (int i = 0; i < 4; i++)
     {
         if (randomColor)
@@ -79,18 +79,22 @@ void Cube::drawSurface(int points[], bool randomColor, int surfaceIdx, bool prin
         glVertex3f(cube_vers[points[i]][0], cube_vers[points[i]][1], cube_vers[points[i]][2]);
     }
     glEnd();
+    glPopMatrix();
     if(!printLines)return;
+    glPushMatrix();
     glBegin(GL_LINES);
     GLfloat dark[] = {0 , 0 , 0 , 1};
-    glMaterialfv(GL_FRONT, GL_AMBIENT, dark);
-    glMaterialfv(GL_FRONT, GL_DIFFUSE, dark);
-    glMaterialfv(GL_FRONT, GL_SPECULAR, dark);
-    glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, dark);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, dark);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, dark);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, mat_shininess);
     for (int i = 0; i < 4; i++)
     {
+       // glColor3f(0 , 0 , 0);
         glVertex3f(cube_vers[points[i]][0], cube_vers[points[i]][1], cube_vers[points[i]][2]);
     }
     glEnd();
+    glPopMatrix();
 }
 void Cube::drawCube(bool randomColor, bool printLines)
 {

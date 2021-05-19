@@ -1,14 +1,14 @@
 # depslib dependency file v1.0
-1619364494 source:e:\study\other\graphics-lab\assignment_3\main.cpp
+1619419411 source:e:\study\other\graphics-lab\assignment_3\main.cpp
 	<GL/gl.h>
 	<GL/glu.h>
 	<GL/glut.h>
-	"Room.h"
 	"Chair.h"
 	"Cube.h"
-	"Drawer.h"
-	"Table.h"
 	"Dias.h"
+	"Drawer.h"
+	"Room.h"
+	"Table.h"
 
 1617515886 e:\downloads\compressed\glut-3.7.6-bin\include\gl\glut.h
 	<windows.h>
@@ -48,10 +48,10 @@
 1619284591 source:e:\study\other\graphics-lab\assignment_3\src\chair.cpp
 	"Chair.h"
 
-1619365813 source:e:\study\other\graphics-lab\assignment_3\src\cube.cpp
+1619419582 source:e:\study\other\graphics-lab\assignment_3\src\cube.cpp
 	"Cube.h"
 
-1619284600 source:e:\study\other\graphics-lab\assignment_3\src\cylinder.cpp
+1619366436 source:e:\study\other\graphics-lab\assignment_3\src\cylinder.cpp
 	"Cylinder.h"
 
 1619284637 source:e:\study\other\graphics-lab\assignment_3\src\dias.cpp
@@ -60,7 +60,7 @@
 1619284665 source:e:\study\other\graphics-lab\assignment_3\src\drawer.cpp
 	"Drawer.h"
 
-1619363090 source:e:\study\other\graphics-lab\assignment_3\src\room.cpp
+1619365890 source:e:\study\other\graphics-lab\assignment_3\src\room.cpp
 	"Room.h"
 
 1619284784 source:e:\study\other\graphics-lab\assignment_3\src\table.cpp
