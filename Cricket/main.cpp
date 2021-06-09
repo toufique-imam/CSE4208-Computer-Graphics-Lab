@@ -4,8 +4,10 @@
 #include "BmpLoader.h"
 #include "Cube.h"
 #include "Human.h"
+#include "SevenSegmentDisplay.h"
 #include "TextureLoader.h"
-#define error(x) cerr << #x << " " << x << "\n";
+#include"DotMatrixDisplay.h"
+#define error(x) cerr << #x << "=" << x << ";\n";
 /*
 Birds eye view?
 170 96
@@ -27,16 +29,16 @@ batsman View
 bowler View
 */
 /*
-605 773 193
-133 410 165
+default view
+-45 478 133
+-62 215 100
 */
-
 bool animationOn = true;
 
 int windowWidth = 1000, windowHeight = 1000;
-int centerX = -22, centerY = 325, centerZ = 235;
+int centerX = -62, centerY = 215, centerZ = 100;
 
-int Txval = -50, Tyval = 988, Tzval = 348, angleNow = 95;
+int Txval = -45, Tyval = 478, Tzval = 133, angleNow = 95;
 
 float r1 = 255, g1 = 0, b1 = 0;
 float r2 = 0, g2 = 255, b2 = 0;
@@ -64,6 +66,11 @@ float ballVelocity[3];
 bool startBall = 0;
 int handAngle = 0;
 int increment = 5;
+int runScored = 0;
+int bowledOut = 0;
+int position_score1[3];
+int position_score2[3];
+bool ballStroke = 0;
 
 void resetAll() {
     rightFront = 0, bowlerReached = 0, bowlerPosY = 10,
@@ -74,15 +81,17 @@ void resetAll() {
     ballLoc[2] = 50;
     ballLoc[0] = -20;
     ballLoc[1] = 0;
-    ballVelocity[1] = 7.5;
+    ballVelocity[1] = 9;
     ballVelocity[2] = -1;
     ballVelocity[0] = 0.2;
     startBall = 0;
     increment = 5;
     stampOut = 0;
+    ballStroke = 0;
     for (int i = 0; i < 4; i++)
         lightOn[i] = 1;
 }
+
 void createLight(int idx, int lightNum, GLfloat light_position[]) {
     GLfloat no_light[] = {0.0, 0.0, 0.0, 1.0};
     GLfloat light_ambient[] = {0.3, 0.3, 0.3, 1.0};
@@ -99,6 +108,7 @@ void createLight(int idx, int lightNum, GLfloat light_position[]) {
     } else
         glDisable(lightNum);
 }
+
 void animate(int) {
     rightFront ^= 1;
     {
@@ -135,6 +145,7 @@ void animate(int) {
     else
         glutTimerFunc(100, animate, 1);
 }
+
 void setColor(Cube dummy) {
     dummy.setSurfaceShine(60);
     GLfloat mat_shininess[] = {dummy.shines[0]};
@@ -143,6 +154,8 @@ void setColor(Cube dummy) {
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, dummy.surfaceLights[2][0]);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, mat_shininess);
 }
+
+//moves object
 void drawBall() {
     if (ballLoc[2] < 10) {
         cout << "Colided " << ballLoc[1] << "\n";
@@ -150,25 +163,31 @@ void drawBall() {
     }
     if (ballLoc[1] > pitchY - 50 && ballLoc[1] < pitchY - 10) {
         if (strikeState) {
+            cout << "HIT " << ballLoc[0] << " " << ballLoc[1] << " " << ballLoc[2] << "\n";
+
+            if (!ballStroke)
+                runScored++;
+            ballStroke = 1;
             if (strikeDir == -1) {
-                ballVelocity[0] = 4;
-                ballVelocity[1] = -4;
-                ballVelocity[2] = 4;
+                ballVelocity[0] = 10;
+                ballVelocity[1] = -10;
+                ballVelocity[2] = 10;
 
             } else if (strikeDir == 1) {
-                ballVelocity[1] = -4;
-                ballVelocity[2] = 4;
+                ballVelocity[1] = -10;
+                ballVelocity[2] = 10;
 
             } else if (strikeDir == 2) {
-                ballVelocity[0] = -4;
-                ballVelocity[1] = -4;
-                ballVelocity[2] = 4;
+                ballVelocity[0] = -10;
+                ballVelocity[1] = -10;
+                ballVelocity[2] = 10;
             }
         }
     }
     if (ballLoc[1] >= pitchY) {
         startBall = 0;
-        cout << "OUT " << ballLoc[1] << " " << pitchY << "\n";
+        bowledOut++;
+        cout << "OUT " << ballLoc[0] << " " << ballLoc[1] << " " << ballLoc[2] << "\n";
         stampOut = 1;
     }
     if (abs(ballLoc[1]) < fieldSize / 2 &&
@@ -182,10 +201,11 @@ void drawBall() {
     }
     // cout << ballLoc[0] << " " << ballLoc[1] << " " << ballLoc[2] << " " << strikeState << " " << strikeDir << "\n";
 
-    glEnable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, ID_BALL);
     glPushMatrix();
     {
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, IDS[ID_BALL]);
+
         Cube dummy;
         dummy.setColor(255, 0, 0);
         glTranslatef(ballLoc[0], ballLoc[1] - pitchY / 2 + 5, ballLoc[2]);
@@ -197,9 +217,10 @@ void drawBall() {
         GLUquadric* quad = gluNewQuadric();
         gluQuadricTexture(quad, true);
         gluSphere(quad, 5, 20, 20);
+        glDisable(GL_TEXTURE_2D);
     }
     glPopMatrix();
-    glDisable(GL_TEXTURE_2D);
+
 }
 
 int calculateBowlerState() {
@@ -253,6 +274,7 @@ void createBowler() {
     glPopMatrix();
 }
 
+//todo add body rotation
 void createBatsman() {
     Human batsman = Human::generalHumanConfig();
     batsman.setBatStatus(true);
@@ -284,71 +306,81 @@ void createBatsman() {
     glPopMatrix();
 }
 
+//doesn't move objects
 void createField() {
     Cube cube(1, 1, 1);
     //field
 
-    glEnable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, ID_GRASS);
     glPushMatrix();
     {
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, IDS[ID_GRASS]);
+
         cube.setRepeat(4);
         cube.setSurfaceLights(cube.green);
         glTranslatef(-fieldSize / 2, -fieldSize / 2, 0);
         glScalef(fieldSize, fieldSize, 2);
         cube.drawCube();
+        glDisable(GL_TEXTURE_2D);
     }
     glPopMatrix();
-    //glBindTexture(GL_TEXTURE_2D , 0);
-    glDisable(GL_TEXTURE_2D);
+
 }
+
 void createPitch() {
     Cube cube(1, 1, 1);
     cube.setRepeat(1);
     cube.setSurfaceLights(cube.offwhite2);
 
     //field
-    glEnable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, ID_PITCH);
     glPushMatrix();
     {
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, IDS[ID_PITCH]);
+
         glTranslatef(-pitchX / 2, -pitchY / 2, 4);
         glScalef(pitchX, pitchY, 2);
         cube.drawCube();
+        glDisable(GL_TEXTURE_2D);
     }
     glPopMatrix();
-    glDisable(GL_TEXTURE_2D);
+
 }
 
 void drawBoundary() {
     Cube cube(1, 1, 1);
-    cube.setSurfaceLights(cube.offwhite2);
-    GLUquadricObj* quadratic;
-    quadratic = gluNewQuadric();
-    gluQuadricTexture(quadratic, true);
-    glEnable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, ID_BANNER2);
+    cube.setSurfaceLights(cube.white);
+
     glPushMatrix();
     {
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, IDS[ID_BANNER2]);
+
+        GLUquadricObj* quadratic;
+        quadratic = gluNewQuadric();
+        gluQuadricTexture(quadratic, TRUE);
+
         setColor(cube);
-        gluCylinder(quadratic, fieldSize / 2 - 50,
-                    fieldSize / 2, 100, 20, 20);
+        gluCylinder(quadratic, fieldSize/2,
+                    fieldSize/2, 50, 100, 100);
+        glDisable(GL_TEXTURE_2D);
     }
     glPopMatrix();
-    glDisable(GL_TEXTURE_2D);
+
 }
 
 void drawStadium() {
     Cube cube(1, 1, 1);
-    GLUquadricObj* quadratic;
-    quadratic = gluNewQuadric();
-    gluQuadricTexture(quadratic, true);
     glPushMatrix();
     {
+        GLUquadricObj* quadratic;
+        quadratic = gluNewQuadric();
+        gluQuadricTexture(quadratic, true);
+
         cube.setColor(200, 200, 0);
         setColor(cube);
         gluCylinder(quadratic, fieldSize / 2 + 50,
-                    fieldSize / 2 + 100, 500, 20, 20);
+                    fieldSize / 2 + 100, 500, 100, 100);
     }
     glPopMatrix();
 }
@@ -356,33 +388,37 @@ void drawStadium() {
 void drawPoll(GLfloat positionx, GLfloat positiony, GLfloat positionz) {
     Cube cube(1, 1, 1);
     cube.setSurfaceLights(cube.offwhite1);
-    GLUquadricObj* quadratic;
-    quadratic = gluNewQuadric();
-    gluQuadricTexture(quadratic, true);
-
-    glEnable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, ID_METAL);
     glPushMatrix();
     {
+        GLUquadricObj* quadratic;
+        quadratic = gluNewQuadric();
+        gluQuadricTexture(quadratic, true);
+
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, IDS[ID_METAL]);
+
         setColor(cube);
         glTranslatef(positionx, positiony, 0);
         gluCylinder(quadratic, 10, 10, positionz + stadiumHeight - 100, 10, 10);
+        glDisable(GL_TEXTURE_2D);
+
     }
     glPopMatrix();
-    glDisable(GL_TEXTURE_2D);
 
-    glEnable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, ID_FLOOD_LIGHT);
     glPushMatrix();
     {
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, IDS[ID_FLOOD_LIGHT]);
+
         setColor(cube);
         glTranslatef(positionx - 150, positiony, positionz + stadiumHeight - 100);
         cube.setRepeat(4);
         glScalef(300, 20, 400);
         cube.drawCube();
+        glDisable(GL_TEXTURE_2D);
     }
     glPopMatrix();
-    glDisable(GL_TEXTURE_2D);
+
 }
 
 void drawPolls() {
@@ -392,17 +428,83 @@ void drawPolls() {
     drawPoll(light_position_up_right[0] - 50, light_position_up_right[1] - 50, stadiumHeight);
 }
 
+string my_to_string(int x) {
+    string ans = "";
+    if (x == 0)
+        return "0";
+    int sign = 0;
+    if (x < 0) {
+        sign = 1;
+        x = -x;
+    }
+    while (x > 0) {
+        ans += char(x % 10 + '0');
+        x = x / 10;
+    }
+    reverse(ans.begin(), ans.end());
+    if (sign)
+        ans = "-" + ans;
+    return ans;
+}
+void drawScrore() {
+    DotMatrixDisplay dotMatrixDisplay;
+    dotMatrixDisplay.setColor(255, 0, 0);
+    dotMatrixDisplay.setScale(1);
+    string scoreRun = "HIT - " + my_to_string(runScored);
+    string scoreMiss = "OUT - " + my_to_string(bowledOut);
+    Cube container;
+    glPushMatrix();
+    {
+        container.setSurfaceLights(container.green);
+        setColor(container);
+        glTranslatef(position_score1[0], position_score1[1], position_score1[2]);
+        glScalef(3, 3, 3);
+        dotMatrixDisplay.drawMessage(scoreRun);
+    }
+    glPopMatrix();
+    container.setValue(1, 1, 1);
+    //drawContainer
+
+    glPushMatrix();
+    {
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, IDS[ID_SCORE_BOARD]);
+
+        container.setSurfaceLights(container.white);
+        glTranslatef(-150, -500, 300);
+        glScalef(300, 1, 200);
+        container.setRepeat(2);
+        container.drawCube();
+        glDisable(GL_TEXTURE_2D);
+
+    }
+    glPopMatrix();
+
+    glPushMatrix();
+    {
+        container.setColor(255, 0, 0);
+        setColor(container);
+        glTranslatef(position_score2[0], position_score2[1], position_score2[2]);
+        glScalef(3, 3, 3);
+        dotMatrixDisplay.drawMessage(scoreMiss);
+    }
+    glPopMatrix();
+}
+
 void createStamp(bool batsmanStamp) {
     Cube dummy;
     dummy.setSurfaceLights(dummy.white);
-    GLUquadricObj* quadratic;
-    quadratic = gluNewQuadric();
-    gluQuadricTexture(quadratic, true);
     for (int i = -1; i < 2; i++) {
-        glEnable(GL_TEXTURE_2D);
-        glBindTexture(GL_TEXTURE_2D, ID_BALL);
         glPushMatrix();
         {
+            GLUquadricObj* quadratic;
+            quadratic = gluNewQuadric();
+            gluQuadricTexture(quadratic, true);
+
+            glEnable(GL_TEXTURE_2D);
+            glBindTexture(GL_TEXTURE_2D, IDS[ID_BALL]);
+
+
             setColor(dummy);
             glTranslatef(5 * i, 0, 2);
             if (stampOut && batsmanStamp) {
@@ -410,11 +512,13 @@ void createStamp(bool batsmanStamp) {
                 glRotatef(10 * (i == 0), -1, 0, 0);
             }
             gluCylinder(quadratic, 1.5, 1.5, 50, 60, 60);
+
+            glDisable(GL_TEXTURE_2D);
         }
         glPopMatrix();
-        glDisable(GL_TEXTURE_2D);
     }
 }
+
 void displayTest() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -433,10 +537,6 @@ void displayTest() {
         centerX, centerY, centerZ,
         0, 0, 1);
 
-    // lightDownLeft();
-    // lightDownRight();
-    // lightFrontLeft();
-    // lightFrontRight();
     createLight(0, GL_LIGHT0, light_position_down_left);
     createLight(1, GL_LIGHT1, light_position_down_right);
     createLight(2, GL_LIGHT2, light_position_up_left);
@@ -444,15 +544,32 @@ void displayTest() {
 
     Cube cube(1, 1, 1);
     //field
-    createField();
+    glPushMatrix();
+    {
+        createField();
+    }
+    glPopMatrix();
 
     //pitch
-    createPitch();
+    glPushMatrix();
+    {
+        createPitch();
+    }
+    glPopMatrix();
+
+    //display Score
+    glPushMatrix();
+    {
+        drawScrore();
+    }
+    glPopMatrix();
 
     //ball
     if (startBall) {
         glPushMatrix();
-        drawBall();
+        {
+            drawBall();
+        }
         glPopMatrix();
     }
 
@@ -475,22 +592,26 @@ void displayTest() {
         cube.setValue(10, 10, 10);
         glTranslatef(0, 0, 6);
         cube.setColor(155, 255, 0);
-        cube.drawCube();
+        //cube.drawCube();
     }
     glPopMatrix();
 
     //bowler
     glPushMatrix();
-    glTranslatef(-20, -(pitchY - pitchY / 3), 2);
-    createBowler();
+    {
+        glTranslatef(-20, -(pitchY - pitchY / 3), 2);
+        createBowler();
+    }
     glPopMatrix();
 
     //batsman
     glPushMatrix();
-    glTranslatef(0, pitchY / 2 - 50, 2);
-    glTranslatef(batsmanMoves * 4 + 10, 0, 0);
-    glRotatef(90, 0, 0, 1);
-    createBatsman();
+    {
+        glTranslatef(0, pitchY / 2 - 60, 2);
+        glTranslatef(batsmanMoves * 4 + 10, 0, 0);
+        glRotatef(90, 0, 0, 1);
+        createBatsman();
+    }
     glPopMatrix();
 
     glPushMatrix();
@@ -501,7 +622,7 @@ void displayTest() {
 
     glPushMatrix();
     {
-        //drawStadium();
+        drawStadium();
     }
     glPopMatrix();
     glPushMatrix();
@@ -513,6 +634,14 @@ void displayTest() {
     glFlush();
     glutSwapBuffers();
 }
+/*
+position_score1[0]=35;
+position_score1[1]=-465;
+position_score1[2]=450;
+position_score2[0]=40;
+position_score2[1]=-485;
+position_score2[2]=360;
+*/
 
 void keyboardCallback(unsigned char key, int x, int y) {
     printf("%c\n", key);
@@ -529,6 +658,49 @@ void keyboardCallback(unsigned char key, int x, int y) {
     case '4':
         lightOn[3] = !lightOn[3];
         break;
+
+    case 't':
+        position_score1[0] += 5;
+        break;
+    case 'T':
+        position_score1[0] -= 5;
+        break;
+
+    case 'y':
+        position_score1[1] += 5;
+        break;
+    case 'Y':
+        position_score1[1] -= 5;
+        break;
+
+    case 'u':
+        position_score1[2] += 5;
+        break;
+    case 'U':
+        position_score1[2] -= 5;
+        break;
+
+    case 'i':
+        position_score2[0] += 5;
+        break;
+    case 'I':
+        position_score2[0] -= 5;
+        break;
+
+    case 'o':
+        position_score2[1] += 5;
+        break;
+    case 'O':
+        position_score2[1] -= 5;
+        break;
+
+    case 'p':
+        position_score2[2] += 5;
+        break;
+    case 'P':
+        position_score2[2] -= 5;
+        break;
+
     case 'z':
         Tzval += 5;
         break;
@@ -616,27 +788,28 @@ void display_work() {
     glutInitWindowSize(windowWidth, windowHeight);
     glutCreateWindow("Cricket");
 
-    glGenTextures(6, IDS);
-    for (int i = 0; i < 10; i++) {
-        IDS[i] = i;
+    position_score1[0]=35;
+    position_score1[1]=-465;
+    position_score1[2]=450;
+    position_score2[0]=40;
+    position_score2[1]=-485;
+    position_score2[2]=360;
+
+    for(int i=1; i<=11; i++) {
+        loadTexture(textureFileName[i], i);
     }
-    loadTexture(textureFileName[ID_BALL], ID_BALL);
-    loadTexture(textureFileName[ID_GRASS], ID_GRASS);
-    loadTexture(textureFileName[ID_GRIP], ID_GRIP);
-    loadTexture(textureFileName[ID_PITCH], ID_PITCH);
-    //loadTexture(textureFileName[ID_WHITE_CLOTH], ID_WHITE_CLOTH);
-    loadTexture(textureFileName[ID_WOOD], ID_WOOD);
-    loadTexture(textureFileName[ID_BANNER2], ID_BANNER2);
-    loadTexture(textureFileName[ID_FLOOD_LIGHT], ID_FLOOD_LIGHT);
-    loadTexture(textureFileName[ID_METAL], ID_METAL);
 
     glShadeModel(GL_SMOOTH);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_NORMALIZE);
+
+    glEnable(GL_LIGHTING);
+    glEnable(GL_BLEND);
+
     //glutReshapeFunc(resize);
     glutTimerFunc(100, animate, 1);
     glutKeyboardFunc(keyboardCallback);
-    glEnable(GL_LIGHTING);
+
     //glEnable(GL_COLOR_MATERIAL);
 
     // light();
@@ -644,13 +817,14 @@ void display_work() {
 }
 
 int main(int argc, char** argv) {
+    DotMatrixDisplay dotMatrixDisplay;
     resetAll();
 
     initTexture();
 
     glutInit(&argc, argv);
 
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH | GLUT_SINGLE);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 
     int type = 0;
     display_work();

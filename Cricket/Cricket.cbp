@@ -6,7 +6,6 @@
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
-			<Script file="lib_finder.script" />
 			<Target title="Debug">
 				<Option output="bin/Debug/Cricket" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="E:/Downloads/Compressed/glut-3.7.6-bin/bin" />
@@ -47,14 +46,16 @@
 		</Linker>
 		<Unit filename="include/BmpLoader.h" />
 		<Unit filename="include/Cube.h" />
-		<Unit filename="include/Cylinder.h" />
+		<Unit filename="include/DotMatrixDisplay.h" />
 		<Unit filename="include/Human.h" />
+		<Unit filename="include/SevenSegmentDisplay.h" />
 		<Unit filename="include/TextureLoader.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/BmpLoader.cpp" />
 		<Unit filename="src/Cube.cpp" />
-		<Unit filename="src/Cylinder.cpp" />
+		<Unit filename="src/DotMatrixDisplay.cpp" />
 		<Unit filename="src/Human.cpp" />
+		<Unit filename="src/SevenSegmentDisplay.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars set="default" />

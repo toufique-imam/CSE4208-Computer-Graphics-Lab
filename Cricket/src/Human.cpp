@@ -70,25 +70,28 @@ void Human::drawBat() {
     float batBodyX = upLegX * .4;
 
     //handle
-    glEnable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, ID_GRIP);
     glPushMatrix();
     {
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, IDS[ID_GRIP]);
         gluCylinder(gluNewQuadric(), batHandleRadius, batHandleRadius, batHandleHeight, 60, 60);
+
+        glDisable(GL_TEXTURE_2D);
     }
     glPopMatrix();
-    glDisable(GL_TEXTURE_2D);
 
-    glBindTexture(GL_TEXTURE_2D, ID_WOOD);
-    glEnable(GL_TEXTURE_2D);
     glPushMatrix();
     {
+        glBindTexture(GL_TEXTURE_2D, IDS[ID_WOOD]);
+        glEnable(GL_TEXTURE_2D);
+
         glTranslatef(0, 0, -batBodyZ / 2.0);
         glScalef(batBodyX, batBodyY, batBodyZ);
         glutSolidCube(1);
+        glDisable(GL_TEXTURE_2D);
     }
     glPopMatrix();
-    glDisable(GL_TEXTURE_2D);
+
 }
 void Human::drawLeg(float downAngles[]) {
     GLdouble upLegRadius = sqrt((upLegX * upLegY * 1.0) / (2.0 * acos(-1)));

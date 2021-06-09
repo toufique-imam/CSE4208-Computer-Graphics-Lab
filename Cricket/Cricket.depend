@@ -1,13 +1,14 @@
 # depslib dependency file v1.0
-1623102910 source:e:\study\other\graphics-lab\cricket\main.cpp
+1623272490 source:e:\study\other\graphics-lab\cricket\main.cpp
 	<GL/gl.h>
 	<GL/glu.h>
 	<GL/glut.h>
 	"BmpLoader.h"
 	"Cube.h"
 	"Human.h"
+	"SevenSegmentDisplay.h"
 	"TextureLoader.h"
-	<ft2build.h>
+	"DotMatrixDisplay.h"
 
 1617515886 e:\downloads\compressed\glut-3.7.6-bin\include\gl\glut.h
 	<windows.h>
@@ -48,7 +49,7 @@
 1621400136 source:e:\study\other\graphics-lab\cricket\src\chair.cpp
 	"Chair.h"
 
-1623081366 source:e:\study\other\graphics-lab\cricket\src\cube.cpp
+1623261677 source:e:\study\other\graphics-lab\cricket\src\cube.cpp
 	"Cube.h"
 
 1621400183 source:e:\study\other\graphics-lab\cricket\src\dias.cpp
@@ -69,7 +70,7 @@
 1621524368 source:e:\study\other\graphics-lab\cricket\src\cylinder.cpp
 	"Cylinder.h"
 
-1622654324 source:e:\study\other\graphics-lab\cricket\src\human.cpp
+1623256939 source:e:\study\other\graphics-lab\cricket\src\human.cpp
 	"Human.h"
 
 1622658109 e:\study\other\graphics-lab\cricket\include\human.h
@@ -81,19 +82,32 @@
 1621574037 source:e:\study\other\graphics-lab\cricket\src\sphere.cpp
 	"Sphere.h"
 
-1622404695 source:e:\study\other\graphics-lab\cricket\src\bmploader.cpp
+1623265368 source:e:\study\other\graphics-lab\cricket\src\bmploader.cpp
 	"BmpLoader.h"
 	<stdio.h>
 	<iostream>
 
-1622404699 e:\study\other\graphics-lab\cricket\include\bmploader.h
+1623265374 e:\study\other\graphics-lab\cricket\include\bmploader.h
 	<windows.h>
 
-1623105966 e:\study\other\graphics-lab\cricket\include\textureloader.h
+1623265326 e:\study\other\graphics-lab\cricket\include\textureloader.h
 	<GL/gl.h>
 	<GL/glu.h>
 	<GL/glut.h>
+	<bits/stdc++.h>
 	"BmpLoader.h"
 
 1622649833 source:e:\study\other\graphics-lab\cricket\src\textureloader.cpp
+
+1623186703 source:e:\study\other\graphics-lab\cricket\src\sevensegmentdisplay.cpp
+	"SevenSegmentDisplay.h"
+
+1623186590 e:\study\other\graphics-lab\cricket\include\sevensegmentdisplay.h
+	<Cube.h>
+
+1623272095 e:\study\other\graphics-lab\cricket\include\dotmatrixdisplay.h
+	"Cube.h"
+
+1623272281 source:e:\study\other\graphics-lab\cricket\src\dotmatrixdisplay.cpp
+	"DotMatrixDisplay.h"
 
