@@ -132,4 +132,13 @@ class Cube {
    private:
 };
 
+static void setMatLight(Cube dummy) {
+    dummy.setSurfaceShine(60);
+    GLfloat mat_shininess[] = {dummy.shines[0]};
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, dummy.surfaceLights[0][0]);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, dummy.surfaceLights[1][0]);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, dummy.surfaceLights[2][0]);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, mat_shininess);
+}
+
 #endif  // CUBE_H

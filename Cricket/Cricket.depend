@@ -1,14 +1,15 @@
 # depslib dependency file v1.0
-1623272490 source:e:\study\other\graphics-lab\cricket\main.cpp
+1623673496 source:e:\study\other\graphics-lab\cricket\main.cpp
 	<GL/gl.h>
 	<GL/glu.h>
 	<GL/glut.h>
+	"BazierCurve.h"
 	"BmpLoader.h"
 	"Cube.h"
-	"Human.h"
-	"SevenSegmentDisplay.h"
-	"TextureLoader.h"
 	"DotMatrixDisplay.h"
+	"Human.h"
+	"Stadium.h"
+	<glm/glm.hpp>
 
 1617515886 e:\downloads\compressed\glut-3.7.6-bin\include\gl\glut.h
 	<windows.h>
@@ -18,7 +19,7 @@
 1621400127 e:\study\other\graphics-lab\cricket\include\chair.h
 	"Cube.h"
 
-1623081304 e:\study\other\graphics-lab\cricket\include\cube.h
+1623614215 e:\study\other\graphics-lab\cricket\include\cube.h
 	<GL/gl.h>
 	<GL/glu.h>
 	<GL/glut.h>
@@ -49,7 +50,7 @@
 1621400136 source:e:\study\other\graphics-lab\cricket\src\chair.cpp
 	"Chair.h"
 
-1623261677 source:e:\study\other\graphics-lab\cricket\src\cube.cpp
+1623612419 source:e:\study\other\graphics-lab\cricket\src\cube.cpp
 	"Cube.h"
 
 1621400183 source:e:\study\other\graphics-lab\cricket\src\dias.cpp
@@ -73,7 +74,7 @@
 1623256939 source:e:\study\other\graphics-lab\cricket\src\human.cpp
 	"Human.h"
 
-1622658109 e:\study\other\graphics-lab\cricket\include\human.h
+1623622275 e:\study\other\graphics-lab\cricket\include\human.h
 	"Cube.h"
 
 1621573712 e:\study\other\graphics-lab\cricket\include\sphere.h
@@ -90,12 +91,13 @@
 1623265374 e:\study\other\graphics-lab\cricket\include\bmploader.h
 	<windows.h>
 
-1623265326 e:\study\other\graphics-lab\cricket\include\textureloader.h
+1623634766 e:\study\other\graphics-lab\cricket\include\textureloader.h
 	<GL/gl.h>
 	<GL/glu.h>
 	<GL/glut.h>
 	<bits/stdc++.h>
 	"BmpLoader.h"
+	"Cube.h"
 
 1622649833 source:e:\study\other\graphics-lab\cricket\src\textureloader.cpp
 
@@ -105,9 +107,43 @@
 1623186590 e:\study\other\graphics-lab\cricket\include\sevensegmentdisplay.h
 	<Cube.h>
 
-1623272095 e:\study\other\graphics-lab\cricket\include\dotmatrixdisplay.h
+1623592696 e:\study\other\graphics-lab\cricket\include\dotmatrixdisplay.h
 	"Cube.h"
 
-1623272281 source:e:\study\other\graphics-lab\cricket\src\dotmatrixdisplay.cpp
+1623592674 source:e:\study\other\graphics-lab\cricket\src\dotmatrixdisplay.cpp
 	"DotMatrixDisplay.h"
+
+1623419841 source:e:\study\other\graphics-lab\cricket\src\stadium.cpp
+	"Stadium.h"
+
+1623419567 e:\study\other\graphics-lab\cricket\include\stadium.h
+	"Cube.h"
+
+1623419175 source:e:\study\other\graphics-lab\cricket\src\supercylinder.cpp
+	"SuperCylinder.h"
+
+1623417075 e:\study\other\graphics-lab\cricket\include\supercylinder.h
+	"Cube.h"
+
+1623615071 source:e:\study\other\graphics-lab\cricket\src\baziercurve.cpp
+	"BazierCurve.h"
+
+1623674967 e:\study\other\graphics-lab\cricket\include\baziercurve.h
+	"Cube.h"
+
+1623674817 source:e:\study\other\graphics-lab\cricket\src\fireworks.cpp
+	"fireworks.h"
+
+1623674763 e:\study\other\graphics-lab\cricket\include\fireworks.h
+	<bits/stdc++.h>
+	<GLUT/glut.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/glut.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1623674611 e:\study\other\graphics-lab\cricket\include\bass.h
+	<wtypes.h>
+	<stdint.h>
 

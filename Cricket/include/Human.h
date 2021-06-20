@@ -2,10 +2,9 @@
 #define HUMAN_H
 #include "Cube.h"
 
-class Human
-{
-public:
-        float headR, headH;
+class Human {
+   public:
+    float headR, headH;
     //head is
     float bodyX, bodyY, bodyZ;
     float upHandX, upHandY, upHandZ;
@@ -22,8 +21,7 @@ public:
     float ballPosition[4];
     float ballInHand;
     Human();
-    Human(float hR, float hH, float bX, float bY, float bZ, float upHX, float upHY, float upHZ, float downHX, float downHY, float downHZ, float upLX, float upLY, float upLZ, float downLX, float downLY, float downLZ)
-    {
+    Human(float hR, float hH, float bX, float bY, float bZ, float upHX, float upHY, float upHZ, float downHX, float downHY, float downHZ, float upLX, float upLY, float upLZ, float downLX, float downLY, float downLZ) {
         setHead(hR, hH);
         setBody(bX, bY, bZ);
         setUpHand(upHX, upHY, upHZ);
@@ -32,46 +30,40 @@ public:
         setDownLeg(downLX, downLY, downLZ);
     }
 
-    void setHead(float x, float y)
-    {
+    void setHead(float x, float y) {
         headR = x;
         headH = y;
         //cerr<<"head"<<headH<<" "<<headR<<"\n";
     }
-    void setBody(float x, float y, float z)
-    {
+    void setBody(float x, float y, float z) {
         bodyX = x;
         bodyY = y;
         bodyZ = z;
 
         //cerr<<"body"<<bodyX<<" "<<bodyY<<" "<<bodyZ<<"\n";
     }
-    void setUpHand(float x, float y, float z)
-    {
+    void setUpHand(float x, float y, float z) {
         upHandX = x;
         upHandY = y;
         upHandZ = z;
 
         //cerr<<"uh"<<upHandX<<" "<<upHandY<<" "<<upHandZ<<"\n";
     }
-    void setDownHand(float x, float y, float z)
-    {
+    void setDownHand(float x, float y, float z) {
         downHandX = x;
         downHandY = y;
         downHandZ = z;
 
         // cerr<<"dh"<<downHandX<<" "<<downHandY<<" "<<downHandZ<<"\n";
     }
-    void setUpLeg(float x, float y, float z)
-    {
+    void setUpLeg(float x, float y, float z) {
         upLegX = x;
         upLegY = y;
         upLegZ = z;
 
         //cerr<<"ul"<<upLegX<<" "<<upLegY<<" "<<upLegZ<<"\n";
     }
-    void setDownLeg(float x, float y, float z)
-    {
+    void setDownLeg(float x, float y, float z) {
         downLegX = x;
         downLegY = y;
         downLegZ = z;
@@ -89,177 +81,193 @@ public:
     void setColor(Cube dummy);
     void printData();
     bool withBat;
-    void setBatStatus(bool hasBat){
+    void setBatStatus(bool hasBat) {
         withBat = hasBat;
     }
-    void setBallAngles(float position[]){
+    void setBallAngles(float position[]) {
         ballPosition[0] = position[0];
         ballPosition[1] = position[1];
         ballPosition[2] = position[2];
     }
-    void setballState(int ballState){
+    void setballState(int ballState) {
         ballInHand = 1;
     }
     void drawBall();
     void drawBat();
 
-    void setHeadAngle(float angle, float x, float y, float z)
-    {
+    void setHeadAngle(float angle, float x, float y, float z) {
         headAngle[0] = angle;
         headAngle[1] = x;
         headAngle[2] = y;
         headAngle[3] = z;
     }
 
-    void set_Up_Right_Hand_Angle(float angle, float x, float y, float z)
-    {
+    void set_Up_Right_Hand_Angle(float angle, float x, float y, float z) {
         upRightHandAngle[0] = angle;
         upRightHandAngle[1] = x;
         upRightHandAngle[2] = y;
         upRightHandAngle[3] = z;
     }
-    void set_Up_Left_Hand_Angle(float angle, float x, float y, float z)
-    {
+    void set_Up_Left_Hand_Angle(float angle, float x, float y, float z) {
         upLeftHandAngle[0] = angle;
         upLeftHandAngle[1] = x;
         upLeftHandAngle[2] = y;
         upLeftHandAngle[3] = z;
     }
 
-    void set_Down_Right_Hand_Angle(float angle, float x, float y, float z)
-    {
+    void set_Down_Right_Hand_Angle(float angle, float x, float y, float z) {
         downRightHandAngle[0] = angle;
         downRightHandAngle[1] = x;
         downRightHandAngle[2] = y;
         downRightHandAngle[3] = z;
     }
 
-    void set_Down_Left_Hand_Angle(float angle, float x, float y, float z)
-    {
+    void set_Down_Left_Hand_Angle(float angle, float x, float y, float z) {
         downLeftHandAngle[0] = angle;
         downLeftHandAngle[1] = x;
         downLeftHandAngle[2] = y;
         downLeftHandAngle[3] = z;
     }
 
-    void set_Up_Left_Leg_Angle(float angle, float x, float y, float z)
-    {
+    void set_Up_Left_Leg_Angle(float angle, float x, float y, float z) {
         upLeftLegAngle[0] = angle;
         upLeftLegAngle[1] = x;
         upLeftLegAngle[2] = y;
         upLeftLegAngle[3] = z;
     }
-    void set_Up_Right_Leg_Angle(float angle, float x, float y, float z)
-    {
+    void set_Up_Right_Leg_Angle(float angle, float x, float y, float z) {
         upRightLegAngle[0] = angle;
         upRightLegAngle[1] = x;
         upRightLegAngle[2] = y;
         upRightLegAngle[3] = z;
     }
 
-    void set_Down_Right_Leg_Angle(float angle, float x, float y, float z)
-    {
+    void set_Down_Right_Leg_Angle(float angle, float x, float y, float z) {
         downRightLegAngle[0] = angle;
         downRightLegAngle[1] = x;
         downRightLegAngle[2] = y;
         downRightLegAngle[3] = z;
     }
-    void set_Down_Left_Leg_Angle(float angle, float x, float y, float z)
-    {
+    void set_Down_Left_Leg_Angle(float angle, float x, float y, float z) {
         downLeftLegAngle[0] = angle;
         downLeftLegAngle[1] = x;
         downLeftLegAngle[2] = y;
         downLeftLegAngle[3] = z;
     }
 
-    void set_Up_Right_Hand_Angle(float angles[4])
-    {
+    void set_Up_Right_Hand_Angle(float angles[4]) {
         upRightHandAngle[0] = angles[0];
         upRightHandAngle[1] = angles[1];
         upRightHandAngle[2] = angles[2];
         upRightHandAngle[3] = angles[3];
     }
-    void set_Up_Left_Hand_Angle(float angles[4])
-    {
+    void set_Up_Left_Hand_Angle(float angles[4]) {
         upLeftHandAngle[0] = angles[0];
         upLeftHandAngle[1] = angles[1];
         upLeftHandAngle[2] = angles[2];
         upLeftHandAngle[3] = angles[3];
     }
 
-    void set_Down_Right_Hand_Angle(float angles[4])
-    {
+    void set_Down_Right_Hand_Angle(float angles[4]) {
         downRightHandAngle[0] = angles[0];
         downRightHandAngle[1] = angles[1];
         downRightHandAngle[2] = angles[2];
         downRightHandAngle[3] = angles[3];
     }
 
-    void set_Down_Left_Hand_Angle(float angles[4])
-    {
+    void set_Down_Left_Hand_Angle(float angles[4]) {
         downLeftHandAngle[0] = angles[0];
         downLeftHandAngle[1] = angles[1];
         downLeftHandAngle[2] = angles[2];
         downLeftHandAngle[3] = angles[3];
     }
 
-    void set_Up_Left_Leg_Angle(float angles[4])
-    {
+    void set_Up_Left_Leg_Angle(float angles[4]) {
         upLeftLegAngle[0] = angles[0];
         upLeftLegAngle[1] = angles[1];
         upLeftLegAngle[2] = angles[2];
         upLeftLegAngle[3] = angles[3];
     }
-    void set_Up_Right_Leg_Angle(float angles[4])
-    {
+    void set_Up_Right_Leg_Angle(float angles[4]) {
         upRightLegAngle[0] = angles[0];
         upRightLegAngle[1] = angles[1];
         upRightLegAngle[2] = angles[2];
         upRightLegAngle[3] = angles[3];
     }
 
-    void set_Down_Right_Leg_Angle(float angles[4])
-    {
+    void set_Down_Right_Leg_Angle(float angles[4]) {
         downRightLegAngle[0] = angles[0];
         downRightLegAngle[1] = angles[1];
         downRightLegAngle[2] = angles[2];
         downRightLegAngle[3] = angles[3];
     }
-    void set_Down_Left_Leg_Angle(float angles[4])
-    {
+    void set_Down_Left_Leg_Angle(float angles[4]) {
         downLeftLegAngle[0] = angles[0];
         downLeftLegAngle[1] = angles[1];
         downLeftLegAngle[2] = angles[2];
         downLeftLegAngle[3] = angles[3];
     }
-    void setPercentage(float percent){
-        setHead(headR*percent, headH*percent);
-        setBody(bodyX*percent, bodyY*percent, bodyZ*percent);
-        setUpHand(upHandX*percent, upHandY*percent, upHandZ*percent);
-        setDownHand(downHandX*percent, downHandY*percent, downHandZ*percent);
-        setUpLeg(upLegX*percent, upLegY*percent, upLegZ*percent);
-        setDownLeg(downLegX*percent, downLegY*percent, downLegZ*percent);
+    void setPercentage(float percent) {
+        setHead(headR * percent, headH * percent);
+        setBody(bodyX * percent, bodyY * percent, bodyZ * percent);
+        setUpHand(upHandX * percent, upHandY * percent, upHandZ * percent);
+        setDownHand(downHandX * percent, downHandY * percent, downHandZ * percent);
+        setUpLeg(upLegX * percent, upLegY * percent, upLegZ * percent);
+        setDownLeg(downLegX * percent, downLegY * percent, downLegZ * percent);
     }
     float runBackLegAngle[2][4] =
-    {
-        {30, -1, 0, 0},
-        {10, -1, 0, 0}
-    };
+        {
+            {30, -1, 0, 0},
+            {10, -1, 0, 0}};
     float runFrontLegAngle[2][4] =
-    {
-        {75, 1, 0, 0},
-        {90, -1, 0, 0}
-    };
+        {
+            {75, 1, 0, 0},
+            {90, -1, 0, 0}};
     float runBackHandAngle[2][4] =
-    {
-        {65, 1, 0, 0},
-        {60, 1, 0, 0}
-    };
+        {
+            {65, 1, 0, 0},
+            {60, 1, 0, 0}};
     float runFrontHandAngle[2][4] =
-    {
-        {30, -1, 0, 0},
-        {30, 1, 0, 0}
-    };
+        {
+            {30, -1, 0, 0},
+            {30, 1, 0, 0}};
+
+    float celebLeftHandAngle1[2][4] =
+        {
+            {30, 1, 1, 0},
+            {30, 1, 0, 0}};
+    float celebRightHandAngle1[2][4] =
+        {
+            {30, 1, -1, 0},
+            {30, -1, 0, 0}};
+
+    float celebLeftLegAngle1[2][4] =
+        {
+            {75, 1, 0, -1},
+            {0, 1, 0, 0}};
+
+    float celebRightLegAngle1[2][4] =
+        {
+            {75, 1, 0, 1},
+            {0, 1, 0, 0}};
+    float celebLeftHandAngle2[2][4] =
+        {
+            {30, 1, -1, 0},
+            {30, 1, 0, 0}};
+    float celebRightHandAngle2[2][4] =
+        {
+            {30, 1, 1, 0},
+            {30, -1, 0, 0}};
+
+    // float celebLeftLegAngle2[2][4] =
+    //     {
+    //         {75, -1, 0, 1},
+    //         {0, -1, 0, 0}};
+
+    // float celebRightLegAngle2[2][4] =
+    //     {
+    //         {75, -1, 0, -1},
+    //         {0, -1, 0, 0}};
     static Human generalHumanConfig() {
         Human human;
         human.setHead(10, 25);
@@ -318,7 +326,36 @@ public:
         runningRightLegConfig(isLeft, human);
         return human;
     }
-    static Human bowlingBowler(int state , bool &startBall , int rightFront) {
+    static void celebHandConfig(Human& human, int state) {
+        if (state % 2) {
+            human.set_Up_Right_Hand_Angle(human.celebRightHandAngle1[0]);
+            human.set_Up_Left_Hand_Angle(human.celebLeftHandAngle1[0]);
+            human.set_Down_Right_Hand_Angle(human.celebRightHandAngle1[1]);
+            human.set_Down_Left_Hand_Angle(human.celebLeftHandAngle1[1]);
+        } else {
+            human.set_Up_Right_Hand_Angle(human.celebRightHandAngle2[0]);
+            human.set_Up_Left_Hand_Angle(human.celebLeftHandAngle2[0]);
+            human.set_Down_Right_Hand_Angle(human.celebRightHandAngle2[1]);
+            human.set_Down_Left_Hand_Angle(human.celebLeftHandAngle2[1]);
+        }
+    }
+
+    static void celebLegConfig(Human& human) {
+        human.set_Up_Right_Leg_Angle(human.celebRightLegAngle1[0]);
+        human.set_Down_Right_Leg_Angle(human.celebRightLegAngle1[1]);
+
+        human.set_Up_Left_Leg_Angle(human.celebLeftLegAngle1[0]);
+        human.set_Down_Left_Leg_Angle(human.celebLeftLegAngle1[1]);
+    }
+
+    static Human celebBowler(int state) {
+        Human human = generalHumanConfig();
+        human.setHeadAngle(30, 1, 0, 0);
+        celebHandConfig(human, state);
+        celebLegConfig(human);
+        return human;
+    }
+    static Human bowlingBowler(int state, bool& startBall, int rightFront) {
         Human human = generalHumanConfig();
         float headAngle = 10 * state;
         float RightHandAngle = 90 + 35 * (state - 1);
@@ -359,12 +396,12 @@ public:
         return human;
     }
 
-    static void offCutLeftHandConfig(Human& human , float handAngle) {
+    static void offCutLeftHandConfig(Human& human, float handAngle) {
         human.set_Up_Left_Hand_Angle(handAngle + 20, 1, 0, -1);
         human.set_Down_Left_Hand_Angle(45, 0, 1, 1);
     }
 
-    static void offCutRightHandConfig(Human& human , float handAngle) {
+    static void offCutRightHandConfig(Human& human, float handAngle) {
         human.set_Up_Right_Hand_Angle(handAngle + 20, 1, 0, -1);
         human.set_Down_Right_Hand_Angle(30, 0, -1, 1);
     }
@@ -379,7 +416,7 @@ public:
         human.set_Down_Right_Hand_Angle(30, 0, -1, 0);
     }
 
-    static void straightCutLeftHandConfig(Human& human , float handAngle) {
+    static void straightCutLeftHandConfig(Human& human, float handAngle) {
         human.set_Up_Left_Hand_Angle(handAngle + 20, 1, 1, 0);
         human.set_Down_Left_Hand_Angle(45, -1, 1, 0);
     }
@@ -397,6 +434,10 @@ public:
     static void humanBatsmanRightConfig(Human& human, float handAngle) {
         human.set_Up_Right_Hand_Angle(handAngle + 20, 1, 0, 0);
         human.set_Down_Right_Hand_Angle(30, 0, -1, 0);
+    }
+    static void humanUmpireRightConfig(Human& human) {
+        human.set_Up_Right_Hand_Angle(180-20, 1, 0, 0);
+        human.set_Down_Right_Hand_Angle(0, 0, -1, 0);
     }
 };
 

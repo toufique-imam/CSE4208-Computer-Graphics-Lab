@@ -56,24 +56,6 @@ vector<vector<float> > Cube::generate_cube(float a, float b, float c) {
     return ans;
 }
 
-static void getNormal3p(GLfloat x1, GLfloat y1, GLfloat z1, GLfloat x2, GLfloat y2, GLfloat z2, GLfloat x3, GLfloat y3, GLfloat z3) {
-    GLfloat Ux, Uy, Uz, Vx, Vy, Vz, Nx, Ny, Nz;
-
-    Ux = x2 - x1;
-    Uy = y2 - y1;
-    Uz = z2 - z1;
-
-    Vx = x3 - x1;
-    Vy = y3 - y1;
-    Vz = z3 - z1;
-
-    Nx = Uy * Vz - Uz * Vy;
-    Ny = Uz * Vx - Ux * Vz;
-    Nz = Ux * Vy - Uy * Vx;
-
-    glNormal3f(Nx, Ny, Nz);
-}
-
 void Cube::drawSurface(int points[], int surfaceIdx) {
     GLfloat mat_shininess[] = {shines[surfaceIdx]};
     glPushMatrix();
@@ -83,7 +65,7 @@ void Cube::drawSurface(int points[], int surfaceIdx) {
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, surfaceLights[2][surfaceIdx]);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, mat_shininess);
 
-    getNormal3p(
+    setNormal(
         cube_vers[points[0]][0], cube_vers[points[0]][1], cube_vers[points[0]][2],
         cube_vers[points[1]][0], cube_vers[points[1]][1], cube_vers[points[1]][2],
         cube_vers[points[2]][0], cube_vers[points[2]][1], cube_vers[points[2]][2]);

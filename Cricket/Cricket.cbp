@@ -44,18 +44,20 @@
 			<Add library="gdi32" />
 			<Add directory="E:/Downloads/Compressed/glut-3.7.6-bin/lib" />
 		</Linker>
+		<Unit filename="include/BazierCurve.h" />
 		<Unit filename="include/BmpLoader.h" />
 		<Unit filename="include/Cube.h" />
 		<Unit filename="include/DotMatrixDisplay.h" />
 		<Unit filename="include/Human.h" />
-		<Unit filename="include/SevenSegmentDisplay.h" />
+		<Unit filename="include/Stadium.h" />
 		<Unit filename="include/TextureLoader.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/BazierCurve.cpp" />
 		<Unit filename="src/BmpLoader.cpp" />
 		<Unit filename="src/Cube.cpp" />
 		<Unit filename="src/DotMatrixDisplay.cpp" />
 		<Unit filename="src/Human.cpp" />
-		<Unit filename="src/SevenSegmentDisplay.cpp" />
+		<Unit filename="src/Stadium.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars set="default" />
